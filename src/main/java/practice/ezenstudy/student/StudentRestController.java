@@ -17,4 +17,9 @@ public class StudentRestController {
     public void register(@RequestBody RegisterStudentRequest request) {
         studentService.create(request);
     }
+
+    @PostMapping("/enrollments")
+    public void enroll(@RequestBody EnrollRequest request) {
+        studentService.enroll(request);
+    }
 }
