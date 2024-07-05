@@ -1,4 +1,4 @@
-package practice.ezenstudy;
+package practice.ezenstudy.lecture;
 
 public enum LectureCategory {
     국어,

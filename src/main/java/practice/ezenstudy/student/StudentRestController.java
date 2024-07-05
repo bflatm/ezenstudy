@@ -1,4 +1,4 @@
-package practice.ezenstudy;
+package practice.ezenstudy.student;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package practice.ezenstudy;
+package practice.ezenstudy.teacher;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

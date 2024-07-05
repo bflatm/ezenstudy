@@ -1,4 +1,4 @@
-package practice.ezenstudy;
+package practice.ezenstudy.lecture;
 
 import org.springframework.stereotype.Service;
 
