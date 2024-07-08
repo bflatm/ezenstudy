@@ -30,9 +30,9 @@ public class Lecture {
     @Enumerated(EnumType.STRING)
     private LectureCategory category;
 
-    private LocalDateTime createdDatetime;
+    private LocalDateTime createdDateTime = LocalDateTime.now();
 
-    private LocalDateTime modifiedDateTime;
+    private LocalDateTime modifiedDateTime = LocalDateTime.now();
 
     public Long getId() {
         return id;
@@ -59,7 +59,7 @@ public class Lecture {
     }
 
     public LocalDateTime getCreatedDatetime() {
-        return createdDatetime;
+        return createdDateTime;
     }
 
     public LocalDateTime getModifiedDateTime() {
