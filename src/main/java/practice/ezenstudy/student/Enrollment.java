@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import practice.ezenstudy.lecture.Lecture;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Enrollment {
 
@@ -19,6 +21,8 @@ public class Enrollment {
 
     @ManyToOne
     private Lecture lecture;
+
+    private LocalDateTime createdDateTime = LocalDateTime.now();
 
     public Enrollment() {
     }
