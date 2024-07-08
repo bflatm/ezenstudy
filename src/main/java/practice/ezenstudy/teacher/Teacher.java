@@ -17,4 +17,16 @@ public class Teacher {
     private String name;
 
     private LocalDate birthday;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
 }

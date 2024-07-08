@@ -40,4 +40,18 @@ public class LectureService {
                 lecture.getModifiedDateTime()
         );
     }
+
+    public List<LectureResponse> findAll() {
+        return lectureRepository.findAll()
+                .stream()
+                .map(lecture -> new LectureResponse(
+                        lecture.getId(),
+                        lecture.getTitle(),
+                        lecture.getTeacher().getName(),
+                        lecture.getPrice(),
+                        lecture.getEnrollments().size(),
+                        lecture.getCategory(),
+                        lecture.getCreatedDatetime()))
+                .toList();
+    }
 }
