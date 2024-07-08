@@ -7,9 +7,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import practice.ezenstudy.student.Enrollment;
 import practice.ezenstudy.teacher.Teacher;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Lecture {
@@ -26,6 +30,9 @@ public class Lecture {
     private Teacher teacher;
 
     private Integer price;
+
+    @OneToMany(mappedBy = "lecture")
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private LectureCategory category;
@@ -64,5 +71,9 @@ public class Lecture {
 
     public LocalDateTime getModifiedDateTime() {
         return modifiedDateTime;
+    }
+
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
     }
 }

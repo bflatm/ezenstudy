@@ -2,21 +2,17 @@ package practice.ezenstudy.lecture;
 
 import org.springframework.stereotype.Service;
 import practice.ezenstudy.student.Enrollment;
-import practice.ezenstudy.student.EnrollmentRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 @Service
 public class LectureService {
 
     private final LectureRepository lectureRepository;
-    private final EnrollmentRepository enrollmentRepository;
 
-    public LectureService(LectureRepository lectureRepository, EnrollmentRepository enrollmentRepository) {
+    public LectureService(LectureRepository lectureRepository) {
         this.lectureRepository = lectureRepository;
-        this.enrollmentRepository = enrollmentRepository;
     }
 
     public LectureDetailResponse findById(Long lectureId) {
@@ -27,13 +23,7 @@ public class LectureService {
             throw new NoSuchElementException("강의를 찾을 수 없습니다 ID: " + lectureId);
         }
 
-//        List<Enrollment> enrollments = enrollmentRepository.findAll()
-//                .stream()
-//                .filter(enrollment -> Objects.equals(
-//                        enrollment.getLecture().getId(),
-//                        lecture.getId()))
-//                .toList();
-        List<Enrollment> enrollments = enrollmentRepository.findAllByLectureId(lectureId);
+        List<Enrollment> enrollments = lecture.getEnrollments();
 
         return new LectureDetailResponse(
                 lecture.getTitle(),
