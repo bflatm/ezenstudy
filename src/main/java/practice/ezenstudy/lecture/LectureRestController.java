@@ -1,5 +1,6 @@
 package practice.ezenstudy.lecture;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,7 +30,7 @@ public class LectureRestController {
     }
 
     @PutMapping("/lectures/{lectureId}")
-    void update(@PathVariable Long lectureId, @RequestBody UpdateLectureRequest body) {
+    void update(@PathVariable Long lectureId, @Valid @RequestBody UpdateLectureRequest body) {
         lectureService.updateById(lectureId, body);
     }
 }
