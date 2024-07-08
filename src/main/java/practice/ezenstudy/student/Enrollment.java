@@ -31,4 +31,20 @@ public class Enrollment {
         this.student = student;
         this.lecture = lecture;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Lecture getLecture() {
+        return lecture;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
 }
