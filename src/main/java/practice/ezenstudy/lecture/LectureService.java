@@ -41,8 +41,14 @@ public class LectureService {
         );
     }
 
-    public List<LectureResponse> findAll() {
-        return lectureRepository.findAll()
+    public List<LectureResponse> findAll(String sort) {
+        List<Lecture> lectures = lectureRepository.findAll();
+
+        if (sort != null && sort.equalsIgnoreCase("recent")) {
+            lectures = lectureRepository.findAllByOrderByCreatedDateTimeDesc();
+        }
+
+        return lectures
                 .stream()
                 .map(lecture -> new LectureResponse(
                         lecture.getId(),
