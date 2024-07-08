@@ -76,4 +76,13 @@ public class Lecture {
     public List<Enrollment> getEnrollments() {
         return enrollments;
     }
+
+    public void updateTitleDescriptionPrice(
+            String title,
+            String description,
+            Integer price) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+    }
 }

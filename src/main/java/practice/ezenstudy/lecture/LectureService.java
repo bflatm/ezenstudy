@@ -1,6 +1,7 @@
 package practice.ezenstudy.lecture;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import practice.ezenstudy.student.Enrollment;
 
 import java.util.List;
@@ -59,5 +60,18 @@ public class LectureService {
                         lecture.getCategory(),
                         lecture.getCreatedDatetime()))
                 .toList();
+    }
+
+    @Transactional
+    public void updateById(Long lectureId, UpdateLectureRequest body) {
+
+        Lecture lecture = lectureRepository.findById(lectureId)
+                .orElse(null);
+
+        if (lecture == null) {
+            throw new NoSuchElementException("없는 강의 ID: " + lectureId);
+        }
+
+        lecture.updateTitleDescriptionPrice(body.title(), body.description(), body.price());
     }
 }
