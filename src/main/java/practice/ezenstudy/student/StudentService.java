@@ -5,6 +5,9 @@ import practice.ezenstudy.SecurityUtils;
 import practice.ezenstudy.lecture.Lecture;
 import practice.ezenstudy.lecture.LectureRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class StudentService {
 
@@ -28,17 +31,30 @@ public class StudentService {
     public void enroll(EnrollRequest request) {
         Student student = studentRepository.findById(request.studentId())
                 .orElse(null);
-        Lecture lecture = lectureRepository.findById(request.lectureId())
-                .orElse(null);
-
-        if (student == null || lecture == null) {
-            throw new IllegalArgumentException("강의 또는 회원 ID가 잘못됨");
+        if (student == null) {
+            throw new IllegalArgumentException("잘못된 학생 ID: " + request.studentId());
         }
 
-        enrollmentRepository.save(new Enrollment(
-                student,
-                lecture
-        ));
+        List<Lecture> lectures = new ArrayList<>();
+        for (Long lectureId : request.lectureIds()) {
+            Lecture lecture = lectureRepository.findById(lectureId)
+                    .orElse(null);
+            if (lecture == null) {
+                throw new IllegalArgumentException("잘못된 강의 ID: " + lectureId);
+            }
+
+            lectures.add(lecture);
+        }
+
+        List<Enrollment> enrollments = lectures.stream()
+                .map(lecture -> new Enrollment(
+                        student,
+                        lecture))
+                .toList();
+
+        for (Enrollment enrollment : enrollments) {
+            enrollmentRepository.save(enrollment);
+        }
     }
 
     public void checkEmailPassword(LoginRequest request) {

@@ -1,7 +1,9 @@
 package practice.ezenstudy.student;
 
+import java.util.List;
+
 public record EnrollRequest(
-        Long lectureId,
+        List<Long> lectureIds,
         Long studentId
 ) {
 }
