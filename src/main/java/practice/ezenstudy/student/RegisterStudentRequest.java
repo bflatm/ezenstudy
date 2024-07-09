@@ -2,6 +2,7 @@ package practice.ezenstudy.student;
 
 public record RegisterStudentRequest(
         String email,
-        String nickname
+        String nickname,
+        String password
 ) {
 }

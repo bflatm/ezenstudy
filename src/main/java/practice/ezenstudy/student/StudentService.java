@@ -1,6 +1,7 @@
 package practice.ezenstudy.student;
 
 import org.springframework.stereotype.Service;
+import practice.ezenstudy.SecurityUtils;
 import practice.ezenstudy.lecture.Lecture;
 import practice.ezenstudy.lecture.LectureRepository;
 
@@ -20,7 +21,8 @@ public class StudentService {
     public void create(RegisterStudentRequest request) {
         studentRepository.save(new Student(
                 request.email(),
-                request.nickname()));
+                request.nickname(),
+                SecurityUtils.sha256Encrypt(request.password())));
     }
 
     public void enroll(EnrollRequest request) {

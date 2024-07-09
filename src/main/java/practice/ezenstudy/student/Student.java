@@ -16,12 +16,16 @@ public class Student {
 
     private String nickname;
 
+    @Column(nullable = false)
+    private String password;
+
     protected Student() {
     }
 
-    public Student(String email, String nickname) {
+    public Student(String email, String nickname, String password) {
         this.email = email;
         this.nickname = nickname;
+        this.password = password;
     }
 
     public Long getId() {
