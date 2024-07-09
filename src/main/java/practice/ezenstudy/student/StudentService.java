@@ -35,15 +35,9 @@ public class StudentService {
             throw new IllegalArgumentException("잘못된 학생 ID: " + request.studentId());
         }
 
-        List<Lecture> lectures = new ArrayList<>();
-        for (Long lectureId : request.lectureIds()) {
-            Lecture lecture = lectureRepository.findById(lectureId)
-                    .orElse(null);
-            if (lecture == null) {
-                throw new IllegalArgumentException("잘못된 강의 ID: " + lectureId);
-            }
-
-            lectures.add(lecture);
+        List<Lecture> lectures = lectureRepository.findAllById(request.lectureIds());
+        if (request.lectureIds().size() != lectures.size()) {
+            throw new IllegalArgumentException("잘못된 강의 ID가 포함되어 있음");
         }
 
         List<Enrollment> enrollments = lectures.stream()
@@ -52,9 +46,7 @@ public class StudentService {
                         lecture))
                 .toList();
 
-        for (Enrollment enrollment : enrollments) {
-            enrollmentRepository.save(enrollment);
-        }
+        enrollmentRepository.saveAll(enrollments);
     }
 
     public void checkEmailPassword(LoginRequest request) {
