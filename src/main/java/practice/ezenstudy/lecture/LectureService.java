@@ -74,4 +74,14 @@ public class LectureService {
 
         lecture.updateTitleDescriptionPrice(body.title(), body.description(), body.price());
     }
+
+    public void deleteById(Long id) {
+//        Lecture lecture = lectureRepository.findById(id)
+//                .orElse(null);
+//        if (lecture == null) {
+//            throw new NoSuchElementException("강의 못 찾음");
+//        }
+
+        lectureRepository.deleteById(id);
+    }
 }
