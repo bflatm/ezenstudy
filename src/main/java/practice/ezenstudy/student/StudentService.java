@@ -1,6 +1,7 @@
 package practice.ezenstudy.student;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import practice.ezenstudy.SecurityUtils;
 import practice.ezenstudy.lecture.Lecture;
 import practice.ezenstudy.lecture.LectureRepository;
@@ -61,5 +62,11 @@ public class StudentService {
                 .equals(SecurityUtils.sha256Encrypt(request.password()))) {
             throw new IllegalArgumentException("ID 또는 PW가 틀립니다");
         }
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        enrollmentRepository.deleteAllByStudentId(id);
+        studentRepository.deleteById(id);
     }
 }
