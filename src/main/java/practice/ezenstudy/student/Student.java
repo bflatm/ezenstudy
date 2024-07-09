@@ -1,5 +1,6 @@
 package practice.ezenstudy.student;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String email;
 
     private String nickname;
@@ -38,5 +40,9 @@ public class Student {
 
     public String getNickname() {
         return nickname;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

@@ -1,5 +1,6 @@
 package practice.ezenstudy.student;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,5 +22,10 @@ public class StudentRestController {
     @PostMapping("/enrollments")
     public void enroll(@RequestBody EnrollRequest request) {
         studentService.enroll(request);
+    }
+
+    @PostMapping("/login")
+    public void login(@Valid @RequestBody LoginRequest request) {
+        studentService.checkEmailPassword(request);
     }
 }

@@ -40,4 +40,18 @@ public class StudentService {
                 lecture
         ));
     }
+
+    public void checkEmailPassword(LoginRequest request) {
+        Student student = studentRepository.findByEmail(request.email())
+                .orElse(null);
+
+        if (student == null) {
+            throw new IllegalArgumentException("ID 또는 PW가 틀립니다");
+        }
+
+        if (!student.getPassword()
+                .equals(SecurityUtils.sha256Encrypt(request.password()))) {
+            throw new IllegalArgumentException("ID 또는 PW가 틀립니다");
+        }
+    }
 }
