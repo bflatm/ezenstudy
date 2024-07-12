@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import org.hibernate.annotations.ColumnDefault;
 import practice.ezenstudy.student.Enrollment;
 import practice.ezenstudy.teacher.Teacher;
 
@@ -38,6 +39,12 @@ public class Lecture {
 
     @Enumerated(EnumType.STRING)
     private LectureCategory category;
+
+    /*
+    * 강의는 등록되면 기본적으로 비공개여야 한다는 요구 사항이 있음
+    * */
+    @ColumnDefault("false") // DB 테이블을 만드는 SQL이 만들어질 때 컬럼에 기본값 지정
+    private boolean isPublic = false; // 기본값이 false임을 명시함
 
     private LocalDateTime createdDateTime = LocalDateTime.now();
 
