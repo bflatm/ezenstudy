@@ -27,6 +27,16 @@ public class LectureRestController {
         return lectureService.create(request);
     }
 
+    @PostMapping("/lectures/bulk")
+    public void createLectures(@RequestBody CreateLecturesRequest request) {
+        if (request.lectures().isEmpty() || request.lectures().size() > 10) {
+            throw new IllegalArgumentException("등록 강의 개수는 1~10개");
+        }
+        for (CreateLectureRequest lecture : request.lectures()) {
+            lectureService.create(lecture);
+        }
+    }
+
     @GetMapping("/lectures/{lectureId}")
     LectureDetailResponse findOne(@PathVariable Long lectureId) {
         return lectureService.findById(lectureId);
