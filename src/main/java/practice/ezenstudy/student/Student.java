@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import practice.ezenstudy.SecurityUtils;
 
 @Entity
 public class Student {
@@ -44,5 +45,10 @@ public class Student {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean authenticate(String rawPassword) {
+        String hashedInputPassword = SecurityUtils.sha256Encrypt(rawPassword);
+        return this.password.equals(hashedInputPassword);
     }
 }

@@ -58,8 +58,7 @@ public class StudentService {
             throw new IllegalArgumentException("ID 또는 PW가 틀립니다");
         }
 
-        if (!student.getPassword()
-                .equals(SecurityUtils.sha256Encrypt(request.password()))) {
+        if (!student.authenticate(request.password())) {
             throw new IllegalArgumentException("ID 또는 PW가 틀립니다");
         }
     }
