@@ -48,15 +48,14 @@ public class LectureService {
     }
 
     public List<LectureResponse> findAll(String sort) {
-        List<Lecture> lectures = lectureRepository.findAll();
+        List<Lecture> lectures = lectureRepository.findAllByIsPublicIsTrue();
 
         if (sort != null && sort.equalsIgnoreCase("recent")) {
-            lectures = lectureRepository.findAllByOrderByCreatedDateTimeDesc();
+            lectures = lectureRepository.findAllByIsPublicIsTrueOrderByCreatedDateTimeDesc();
         }
 
         return lectures
                 .stream()
-                .filter(lecture -> lecture.isPublic())
                 .map(lecture -> new LectureResponse(
                         lecture.getId(),
                         lecture.getTitle(),
