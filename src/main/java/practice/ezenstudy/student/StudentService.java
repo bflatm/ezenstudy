@@ -92,4 +92,15 @@ public class StudentService {
                 student.getNickname()
         );
     }
+
+    @Transactional
+    public void changePassword(String userEmail, ChangePasswordRequest request) {
+        Student student = studentRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("사용자 정보를 찾을 수 없습니다."));
+        if (!student.authenticate(request.oldPassword())) {
+            throw new IllegalArgumentException("비밀번호 변경에 실패했습니다. 현재 비밀번호를 확인해 주세요.");
+        }
+
+        student.changePassword(request.newPassword());
+    }
 }

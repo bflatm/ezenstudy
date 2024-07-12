@@ -3,6 +3,7 @@ package practice.ezenstudy.student;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +43,11 @@ public class StudentRestController {
     @GetMapping("/me")
     public StudentResponse getCurrentUser(@LoginStudent String userEmail) {
         return studentService.getCurrentUser(userEmail);
+    }
+
+    @PatchMapping("/students")
+    public void changePassword(@LoginStudent String userEmail, @RequestBody ChangePasswordRequest request) {
+        studentService.changePassword(userEmail, request);
     }
 
     @DeleteMapping("/students/{id}")

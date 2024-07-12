@@ -51,4 +51,8 @@ public class Student {
         String hashedInputPassword = SecurityUtils.sha256Encrypt(rawPassword);
         return this.password.equals(hashedInputPassword);
     }
+
+    public void changePassword(String rawPassword) {
+        this.password = SecurityUtils.sha256Encrypt(rawPassword);
+    }
 }
