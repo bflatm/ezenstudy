@@ -1,5 +1,6 @@
 package practice.ezenstudy.lecture;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,6 +23,7 @@ public class Lecture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true) // 강의 제목 중복 불가
     private String title;
 
     private String description;
@@ -40,6 +42,15 @@ public class Lecture {
     private LocalDateTime createdDateTime = LocalDateTime.now();
 
     private LocalDateTime modifiedDateTime = LocalDateTime.now();
+
+    // 외부에서 받아야만 하는 데이터들만 constructor의 파라미터로 지정
+    public Lecture(String title, String description, Teacher teacher, Integer price, LectureCategory category) {
+        this.title = title;
+        this.description = description;
+        this.teacher = teacher;
+        this.price = price;
+        this.category = category;
+    }
 
     public Long getId() {
         return id;
