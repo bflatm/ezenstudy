@@ -56,6 +56,7 @@ public class LectureService {
 
         return lectures
                 .stream()
+                .filter(lecture -> lecture.isPublic())
                 .map(lecture -> new LectureResponse(
                         lecture.getId(),
                         lecture.getTitle(),

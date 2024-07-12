@@ -99,6 +99,10 @@ public class Lecture {
         return enrollments;
     }
 
+    public boolean isPublic() {
+        return isPublic;
+    }
+
     public void updateTitleDescriptionPrice(
             String title,
             String description,
