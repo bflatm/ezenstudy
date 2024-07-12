@@ -86,4 +86,13 @@ public class StudentService {
         enrollmentRepository.deleteAllByStudentId(id);
         studentRepository.deleteById(id);
     }
+
+    public StudentResponse getCurrentUser(String userEmail) {
+        Student student = studentRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException(""));
+        return new StudentResponse(
+                student.getEmail(),
+                student.getNickname()
+        );
+    }
 }
