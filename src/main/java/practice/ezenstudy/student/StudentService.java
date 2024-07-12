@@ -36,12 +36,9 @@ public class StudentService {
                 SecurityUtils.sha256Encrypt(request.password())));
     }
 
-    public void enroll(EnrollRequest request) {
-        Student student = studentRepository.findById(request.studentId())
-                .orElse(null);
-        if (student == null) {
-            throw new IllegalArgumentException("잘못된 학생 ID: " + request.studentId());
-        }
+    public void enroll(String userEmail, EnrollRequest request) {
+        Student student = studentRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 학생 email: " + userEmail));
 
         List<Lecture> lectures = lectureRepository.findAllById(request.lectureIds());
         if (request.lectureIds().size() != lectures.size()) {

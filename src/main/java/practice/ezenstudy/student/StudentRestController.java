@@ -28,8 +28,25 @@ public class StudentRestController {
     }
 
     @PostMapping("/enrollments")
-    public void enroll(@RequestBody EnrollRequest request) {
-        studentService.enroll(request);
+    public void enroll(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization,
+            @RequestBody EnrollRequest request
+    ) {
+        String[] tokenFormat = authorization.split(" ");
+        String tokenType = tokenFormat[0];
+        String token = tokenFormat[1];
+
+        if (tokenType.equals("Bearer") == false) {
+            throw new IllegalArgumentException("로그인 정보가 유효하지 않습니다");
+        }
+
+        if (jwtProvider.isValidToken(token) == false) {
+            throw new IllegalArgumentException("로그인 정보가 유효하지 않습니다");
+        }
+
+        String userEmail = jwtProvider.getSubject(token);
+
+        studentService.enroll(userEmail, request);
     }
 
     @PostMapping("/login")
