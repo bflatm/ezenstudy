@@ -33,8 +33,8 @@ public class LectureRestController {
     }
 
     @GetMapping("/lectures")
-    List<LectureResponse> findAll(@RequestParam(required = false) String sort) {
-        return lectureService.findAll(sort);
+    List<LectureResponse> getAllLectures(@RequestParam(required = false) String sort) {
+        return lectureService.getAllLectures(sort);
     }
 
     @PutMapping("/lectures/{lectureId}")

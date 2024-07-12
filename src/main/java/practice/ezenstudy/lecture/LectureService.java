@@ -47,7 +47,7 @@ public class LectureService {
         );
     }
 
-    public List<LectureResponse> findAll(String sort) {
+    public List<LectureResponse> getAllLectures(String sort) {
         List<Lecture> lectures = lectureRepository.findAllByIsPublicIsTrue();
 
         if (sort != null && sort.equalsIgnoreCase("recent")) {
