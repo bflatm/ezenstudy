@@ -27,8 +27,8 @@ public class StudentRestController {
     }
 
     @PostMapping("/login")
-    public void login(@Valid @RequestBody LoginRequest request) {
-        studentService.checkEmailPassword(request);
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        return studentService.authenticateAndGenerateToken(request);
     }
 
     @DeleteMapping("/students/{id}")

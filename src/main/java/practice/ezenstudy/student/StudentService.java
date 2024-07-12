@@ -2,11 +2,11 @@ package practice.ezenstudy.student;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import practice.ezenstudy.JwtProvider;
 import practice.ezenstudy.SecurityUtils;
 import practice.ezenstudy.lecture.Lecture;
 import practice.ezenstudy.lecture.LectureRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,11 +15,18 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final EnrollmentRepository enrollmentRepository;
     private final LectureRepository lectureRepository;
+    private final JwtProvider jwtProvider;
 
-    public StudentService(StudentRepository studentRepository, EnrollmentRepository enrollmentRepository, LectureRepository lectureRepository) {
+    public StudentService(
+            StudentRepository studentRepository,
+            EnrollmentRepository enrollmentRepository,
+            LectureRepository lectureRepository,
+            JwtProvider jwtProvider
+    ) {
         this.studentRepository = studentRepository;
         this.enrollmentRepository = enrollmentRepository;
         this.lectureRepository = lectureRepository;
+        this.jwtProvider = jwtProvider;
     }
 
     public void create(RegisterStudentRequest request) {
@@ -50,17 +57,28 @@ public class StudentService {
         enrollmentRepository.saveAll(enrollments);
     }
 
-    public void checkEmailPassword(LoginRequest request) {
+    public LoginResponse authenticateAndGenerateToken(LoginRequest request) {
+        Student student = authenticate(request);
+        String token = generateToken(student);
+        return new LoginResponse(token);
+    }
+
+    private Student authenticate(LoginRequest request) {
+        // email 검증
         Student student = studentRepository.findByEmail(request.email())
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException("ID 또는 PW가 틀립니다"));
 
-        if (student == null) {
-            throw new IllegalArgumentException("ID 또는 PW가 틀립니다");
-        }
-
+        // password 검증
         if (!student.authenticate(request.password())) {
             throw new IllegalArgumentException("ID 또는 PW가 틀립니다");
         }
+
+        return student;
+    }
+
+    public String generateToken(Student student) {
+        // 주입받은 JwtProvider 오브젝트를 통해 토큰 발급
+        return jwtProvider.createToken(student.getEmail());
     }
 
     @Transactional
