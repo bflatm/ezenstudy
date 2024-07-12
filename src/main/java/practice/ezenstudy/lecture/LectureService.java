@@ -124,4 +124,12 @@ public class LectureService {
                 lecture.getModifiedDateTime()
         );
     }
+
+    @Transactional
+    public void setLecturePublicStatus(Long lectureId, UpdatePublicStatusRequest request) {
+        Lecture lecture = lectureRepository.findById(lectureId)
+                .orElseThrow(() -> new NoSuchElementException(""));
+
+        lecture.setPublic(request.isPublic());
+    }
 }

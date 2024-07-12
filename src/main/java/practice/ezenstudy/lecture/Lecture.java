@@ -50,6 +50,10 @@ public class Lecture {
 
     private LocalDateTime modifiedDateTime = LocalDateTime.now();
 
+    // JPA가 SELECT 후 조회한 데이터로 강의 오브젝트를 만들 때 사용됨
+    protected Lecture() {
+    }
+
     // 외부에서 받아야만 하는 데이터들만 constructor의 파라미터로 지정
     public Lecture(String title, String description, Teacher teacher, Integer price, LectureCategory category) {
         this.title = title;
@@ -102,5 +106,9 @@ public class Lecture {
         this.title = title;
         this.description = description;
         this.price = price;
+    }
+
+    public void setPublic(Boolean isPublic) {
+        this.isPublic = isPublic;
     }
 }
