@@ -132,4 +132,12 @@ public class LectureService {
 
         lecture.setPublic(request.isPublic());
     }
+
+    public void createLectures(CreateLecturesRequest request) {
+        for (CreateLectureRequest lecture : request.lectures()) {
+            // create() 안에 강사를 찾는 코드가 있는데 JPA가 한 번 찾은 강사는 캐싱해 두기 때문에
+            // 반복해서 같은 강사를 찾아도 SQL 쿼리가 추가로 실행되지 않음
+            this.create(lecture);
+        }
+    }
 }

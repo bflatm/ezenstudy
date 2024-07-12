@@ -28,13 +28,8 @@ public class LectureRestController {
     }
 
     @PostMapping("/lectures/bulk")
-    public void createLectures(@RequestBody CreateLecturesRequest request) {
-        if (request.lectures().isEmpty() || request.lectures().size() > 10) {
-            throw new IllegalArgumentException("등록 강의 개수는 1~10개");
-        }
-        for (CreateLectureRequest lecture : request.lectures()) {
-            lectureService.create(lecture);
-        }
+    public void createLectures(@Valid @RequestBody CreateLecturesRequest request) {
+        lectureService.createLectures(request);
     }
 
     @GetMapping("/lectures/{lectureId}")
