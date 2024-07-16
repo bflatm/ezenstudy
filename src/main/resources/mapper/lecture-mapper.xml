@@ -15,6 +15,10 @@
         FROM lecture l
         JOIN teacher t
         ON l.teacher_id = t.id
+        <if test="studentId != null">
+            JOIN enrollment e
+            ON e.lecture_id = l.id
+        </if>
         <!--        WHERE is_public = true-->
         <where>
             <if test="title != null">
@@ -26,6 +30,9 @@
             </if>
             <if test="category != null">
                 and l.category = #{category}
+            </if>
+            <if test="studentId != null">
+                and e.student_id = #{studentId}
             </if>
         </where>
         <if test="sort == 'RECENT'">

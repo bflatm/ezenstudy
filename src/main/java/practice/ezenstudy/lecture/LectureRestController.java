@@ -49,9 +49,10 @@ public class LectureRestController {
             @RequestParam(required = false) String sort,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String teacherName,
-            @RequestParam(required = false) String category
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String studentId
     ) {
-        return lectureMapper.findAll(sort, title, teacherName, category);
+        return lectureMapper.findAll(sort, title, teacherName, category, studentId);
     }
 
     @PutMapping("/lectures/{lectureId}")
