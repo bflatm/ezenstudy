@@ -3,8 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="practice.ezenstudy.lecture.LectureMapper">
-    <select id="findAll" resultType="practice.ezenstudy.lecture.Lecture">
-        SELECT *
-        FROM lecture
+    <select id="findAll" resultType="practice.ezenstudy.lecture.LectureResponse">
+        SELECT
+         l.id AS lectureId,
+         l.title,
+         t.name AS teacher,
+         l.price,
+         (SELECT COUNT(*) FROM enrollment e WHERE e.lecture_id = l.id) AS studentCount,
+         l.category,
+         l.created_date_time AS createdAt
+        FROM lecture l
+        JOIN teacher t
+        ON l.teacher_id = t.id
+        <!--        WHERE is_public = true-->
+        <if test="sort == 'RECENT'">
+            order by created_date_time DESC
+        </if>
     </select>
 </mapper>

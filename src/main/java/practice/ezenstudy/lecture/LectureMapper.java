@@ -6,5 +6,5 @@ import java.util.List;
 
 @Mapper
 public interface LectureMapper {
-    List<Lecture> findAll();
+    List<LectureResponse> findAll(String sort);
 }

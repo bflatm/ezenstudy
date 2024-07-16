@@ -44,14 +44,11 @@ public class LectureRestController {
         return lectureService.findById(lectureId);
     }
 
-//    @GetMapping("/lectures")
-//    List<LectureResponse> getAllLectures(@RequestParam(required = false) String sort) {
-//        return lectureService.getAllLectures(sort);
-//    }
-
     @GetMapping("/lectures")
-    List<Lecture> getAllLectures() {
-        return lectureMapper.findAll();
+    List<LectureResponse> getAllLectures(
+            @RequestParam(required = false) String sort
+    ) {
+        return lectureMapper.findAll(sort);
     }
 
     @PutMapping("/lectures/{lectureId}")
