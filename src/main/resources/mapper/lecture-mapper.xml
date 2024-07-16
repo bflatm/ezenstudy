@@ -24,6 +24,9 @@
 <!--                and t.name LIKE CONCAT('%', #{teacherName}, '%')-->
                 and t.name = #{teacherName}
             </if>
+            <if test="category != null">
+                and l.category = #{category}
+            </if>
         </where>
         <if test="sort == 'RECENT'">
             order by created_date_time DESC
