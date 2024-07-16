@@ -20,6 +20,10 @@
             <if test="title != null">
                 and l.title LIKE CONCAT('%', #{title}, '%')
             </if>
+            <if test="teacherName != null">
+<!--                and t.name LIKE CONCAT('%', #{teacherName}, '%')-->
+                and t.name = #{teacherName}
+            </if>
         </where>
         <if test="sort == 'RECENT'">
             order by created_date_time DESC
