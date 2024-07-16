@@ -16,6 +16,11 @@
         JOIN teacher t
         ON l.teacher_id = t.id
         <!--        WHERE is_public = true-->
+        <where>
+            <if test="title != null">
+                and l.title LIKE CONCAT('%', #{title}, '%')
+            </if>
+        </where>
         <if test="sort == 'RECENT'">
             order by created_date_time DESC
         </if>
