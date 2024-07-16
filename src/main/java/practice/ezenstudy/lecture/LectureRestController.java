@@ -17,9 +17,16 @@ import java.util.List;
 public class LectureRestController {
 
     private final LectureService lectureService;
+    private final LectureMapper lectureMapper;
 
-    public LectureRestController(LectureService lectureService) {
+//    public LectureRestController(LectureService lectureService) {
+//        this.lectureService = lectureService;
+//    }
+
+
+    public LectureRestController(LectureService lectureService, LectureMapper lectureMapper) {
         this.lectureService = lectureService;
+        this.lectureMapper = lectureMapper;
     }
 
     @PostMapping("/lectures")
@@ -37,9 +44,14 @@ public class LectureRestController {
         return lectureService.findById(lectureId);
     }
 
+//    @GetMapping("/lectures")
+//    List<LectureResponse> getAllLectures(@RequestParam(required = false) String sort) {
+//        return lectureService.getAllLectures(sort);
+//    }
+
     @GetMapping("/lectures")
-    List<LectureResponse> getAllLectures(@RequestParam(required = false) String sort) {
-        return lectureService.getAllLectures(sort);
+    List<Lecture> getAllLectures() {
+        return lectureMapper.findAll();
     }
 
     @PutMapping("/lectures/{lectureId}")
