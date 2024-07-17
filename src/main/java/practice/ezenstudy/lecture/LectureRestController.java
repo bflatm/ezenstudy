@@ -45,14 +45,8 @@ public class LectureRestController {
     }
 
     @GetMapping("/lectures")
-    List<LectureResponse> getAllLectures(
-            @RequestParam(required = false) String sort,
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String teacherName,
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) String studentId
-    ) {
-        return lectureMapper.findAll(sort, title, teacherName, category, studentId);
+    List<LectureResponse> getAllLectures(LectureSearchParams params) {
+        return lectureMapper.findAll(params);
     }
 
     @PutMapping("/lectures/{lectureId}")
