@@ -41,5 +41,6 @@
         <if test="sort == 'POPULAR'">
             order by studentCount DESC
         </if>
+        LIMIT #{pageSize} OFFSET #{offset}
     </select>
 </mapper>
