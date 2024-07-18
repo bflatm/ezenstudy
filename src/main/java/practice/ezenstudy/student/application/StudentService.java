@@ -83,9 +83,9 @@ public class StudentService {
     }
 
     @Transactional
-    public void deleteById(Long id) {
-        enrollmentRepository.deleteAllByStudentId(id);
-        studentRepository.deleteById(id);
+    public void deleteByEmail(String email) {
+        enrollmentRepository.deleteAllByStudentEmail(email);
+        studentRepository.deleteByEmail(email);
     }
 
     public StudentResponse getCurrentUser(String userEmail) {
