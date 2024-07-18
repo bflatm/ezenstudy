@@ -1,11 +1,15 @@
-package practice.ezenstudy.student;
+package practice.ezenstudy.student.application;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import practice.ezenstudy.JwtProvider;
 import practice.ezenstudy.SecurityUtils;
-import practice.ezenstudy.lecture.Lecture;
-import practice.ezenstudy.lecture.LectureRepository;
+import practice.ezenstudy.lecture.domain.Lecture;
+import practice.ezenstudy.lecture.domain.LectureRepository;
+import practice.ezenstudy.student.domain.Enrollment;
+import practice.ezenstudy.student.domain.EnrollmentRepository;
+import practice.ezenstudy.student.domain.Student;
+import practice.ezenstudy.student.domain.StudentRepository;
 
 import java.util.List;
 

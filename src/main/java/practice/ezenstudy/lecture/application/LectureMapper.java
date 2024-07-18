@@ -1,4 +1,4 @@
-package practice.ezenstudy.lecture;
+package practice.ezenstudy.lecture.application;
 
 import org.apache.ibatis.annotations.Mapper;
 

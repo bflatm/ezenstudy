@@ -1,4 +1,6 @@
-package practice.ezenstudy.lecture;
+package practice.ezenstudy.lecture.application;
+
+import practice.ezenstudy.lecture.domain.LectureCategory;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,8 +1,10 @@
-package practice.ezenstudy.lecture;
+package practice.ezenstudy.lecture.application;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import practice.ezenstudy.student.Enrollment;
+import practice.ezenstudy.lecture.domain.Lecture;
+import practice.ezenstudy.lecture.domain.LectureRepository;
+import practice.ezenstudy.student.domain.Enrollment;
 import practice.ezenstudy.teacher.Teacher;
 import practice.ezenstudy.teacher.TeacherRepository;
 

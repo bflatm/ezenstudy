@@ -1,4 +1,4 @@
-package practice.ezenstudy.lecture;
+package practice.ezenstudy.lecture.application;
 
 public record LectureSearchParams(
         String sort,

@@ -1,4 +1,4 @@
-package practice.ezenstudy.student;
+package practice.ezenstudy.student.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

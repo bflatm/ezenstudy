@@ -1,4 +1,4 @@
-package practice.ezenstudy.student;
+package practice.ezenstudy.student.application;
 
 import java.util.List;
 

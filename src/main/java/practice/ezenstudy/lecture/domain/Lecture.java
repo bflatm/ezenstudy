@@ -1,4 +1,4 @@
-package practice.ezenstudy.lecture;
+package practice.ezenstudy.lecture.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import org.hibernate.annotations.ColumnDefault;
-import practice.ezenstudy.student.Enrollment;
+import practice.ezenstudy.student.domain.Enrollment;
 import practice.ezenstudy.teacher.Teacher;
 
 import java.time.LocalDateTime;

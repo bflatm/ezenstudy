@@ -1,11 +1,11 @@
-package practice.ezenstudy.student;
+package practice.ezenstudy.student.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import practice.ezenstudy.lecture.Lecture;
+import practice.ezenstudy.lecture.domain.Lecture;
 
 import java.time.LocalDateTime;
 

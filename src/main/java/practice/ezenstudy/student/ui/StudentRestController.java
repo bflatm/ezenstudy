@@ -1,4 +1,4 @@
-package practice.ezenstudy.student;
+package practice.ezenstudy.student.ui;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import practice.ezenstudy.JwtProvider;
 import practice.ezenstudy.LoginStudent;
+import practice.ezenstudy.student.application.ChangePasswordRequest;
+import practice.ezenstudy.student.application.EnrollRequest;
+import practice.ezenstudy.student.application.LoginRequest;
+import practice.ezenstudy.student.application.LoginResponse;
+import practice.ezenstudy.student.application.RegisterStudentRequest;
+import practice.ezenstudy.student.application.StudentResponse;
+import practice.ezenstudy.student.application.StudentService;
 
 @RestController
 public class StudentRestController {

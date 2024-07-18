@@ -1,4 +1,4 @@
-package practice.ezenstudy.lecture;
+package practice.ezenstudy.lecture.ui;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,6 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import practice.ezenstudy.lecture.application.CreateLectureRequest;
+import practice.ezenstudy.lecture.application.CreateLecturesRequest;
+import practice.ezenstudy.lecture.application.LectureDetailResponse;
+import practice.ezenstudy.lecture.application.LectureSearchParams;
+import practice.ezenstudy.lecture.application.LectureService;
+import practice.ezenstudy.lecture.application.PagedLecturesResponse;
+import practice.ezenstudy.lecture.application.UpdateLectureRequest;
+import practice.ezenstudy.lecture.application.UpdatePublicStatusRequest;
 
 @RestController
 public class LectureRestController {

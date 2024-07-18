@@ -1,4 +1,4 @@
-package practice.ezenstudy.lecture;
+package practice.ezenstudy.lecture.application;
 
 import jakarta.validation.constraints.Size;
 
