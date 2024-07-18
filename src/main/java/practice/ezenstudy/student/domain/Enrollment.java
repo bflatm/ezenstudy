@@ -47,4 +47,8 @@ public class Enrollment {
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
     }
+
+    public boolean isEnrolledByStudent(Student student) {
+        return this.student.getId().equals(student.getId());
+    }
 }

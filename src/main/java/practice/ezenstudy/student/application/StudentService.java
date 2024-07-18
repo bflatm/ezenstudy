@@ -1,5 +1,6 @@
 package practice.ezenstudy.student.application;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import practice.ezenstudy.JwtProvider;
@@ -56,6 +57,24 @@ public class StudentService {
                 .toList();
 
         enrollmentRepository.saveAll(enrollments);
+    }
+
+    public void cancelEnrollment(String userEmail, Long enrollmentId) {
+        // email로 학생을 찾는다. 못 찾으면 에러 발생
+        Student student = studentRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException("학생을 찾을 수 없습니다 email: " + userEmail));
+
+        // 정말 본인이 수강 신청한 것이 맞는지 확인하기 위해 수강 신청 내역을 조회
+        Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
+                .orElseThrow(() -> new EntityNotFoundException("수강 신청 내역을 찾을 수 없습니다 id: " + enrollmentId));
+
+        // 본인이 신청한 것이 맞는지 확인
+        if (!enrollment.isEnrolledByStudent(student)) {
+            throw new IllegalStateException("수강 신청 취소할 권한이 없는 학생입니다");
+        }
+
+        // 데이터베이스에서 수강 신청 내역 삭제
+        enrollmentRepository.deleteById(enrollmentId);
     }
 
     public LoginResponse authenticateAndGenerateToken(LoginRequest request) {
