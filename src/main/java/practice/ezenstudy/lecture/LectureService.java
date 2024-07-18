@@ -15,10 +15,12 @@ public class LectureService {
 
     private final LectureRepository lectureRepository;
     private final TeacherRepository teacherRepository;
+    private final LectureMapper lectureMapper;
 
-    public LectureService(LectureRepository lectureRepository, TeacherRepository teacherRepository) {
+    public LectureService(LectureRepository lectureRepository, TeacherRepository teacherRepository, LectureMapper lectureMapper) {
         this.lectureRepository = lectureRepository;
         this.teacherRepository = teacherRepository;
+        this.lectureMapper = lectureMapper;
     }
 
     public LectureDetailResponse findById(Long lectureId) {
@@ -47,24 +49,8 @@ public class LectureService {
         );
     }
 
-    public List<LectureResponse> getAllLectures(String sort) {
-        List<Lecture> lectures = lectureRepository.findAllByIsPublicIsTrue();
-
-        if (sort != null && sort.equalsIgnoreCase("recent")) {
-            lectures = lectureRepository.findAllByIsPublicIsTrueOrderByCreatedDateTimeDesc();
-        }
-
-        return lectures
-                .stream()
-                .map(lecture -> new LectureResponse(
-                        lecture.getId(),
-                        lecture.getTitle(),
-                        lecture.getTeacher().getName(),
-                        lecture.getPrice(),
-                        lecture.getEnrollments().size(),
-                        lecture.getCategory(),
-                        lecture.getCreatedDatetime()))
-                .toList();
+    public List<LectureResponse> getAllLectures(LectureSearchParams params) {
+        return lectureMapper.findAll(params);
     }
 
     @Transactional

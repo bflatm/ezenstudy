@@ -17,16 +17,9 @@ import java.util.List;
 public class LectureRestController {
 
     private final LectureService lectureService;
-    private final LectureMapper lectureMapper;
 
-//    public LectureRestController(LectureService lectureService) {
-//        this.lectureService = lectureService;
-//    }
-
-
-    public LectureRestController(LectureService lectureService, LectureMapper lectureMapper) {
+    public LectureRestController(LectureService lectureService) {
         this.lectureService = lectureService;
-        this.lectureMapper = lectureMapper;
     }
 
     @PostMapping("/lectures")
@@ -46,7 +39,7 @@ public class LectureRestController {
 
     @GetMapping("/lectures")
     List<LectureResponse> getAllLectures(LectureSearchParams params) {
-        return lectureMapper.findAll(params);
+        return lectureService.getAllLectures(params);
     }
 
     @PutMapping("/lectures/{lectureId}")
