@@ -3,6 +3,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="practice.ezenstudy.lecture.LectureMapper">
+    <select id="countAll" resultType="int">
+        SELECT COUNT(DISTINCT l.id)
+        FROM lecture l
+        JOIN teacher t ON l.teacher_id = t.id
+        <if test="studentId != null">
+            JOIN enrollment e ON e.lecture_id = l.id
+        </if>
+        <where>
+            <if test="title != null">
+                and l.title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="teacherName != null">
+                and t.name = #{teacherName}
+            </if>
+            <if test="category != null">
+                and l.category = #{category}
+            </if>
+            <if test="studentId != null">
+                and e.student_id = #{studentId}
+            </if>
+        </where>
+    </select>
     <select id="findAll" resultType="practice.ezenstudy.lecture.LectureResponse">
         SELECT
          l.id AS lectureId,

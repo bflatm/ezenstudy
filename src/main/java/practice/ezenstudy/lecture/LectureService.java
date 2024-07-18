@@ -49,8 +49,15 @@ public class LectureService {
         );
     }
 
-    public List<LectureResponse> getAllLectures(LectureSearchParams params) {
-        return lectureMapper.findAll(params);
+    public PagedLecturesResponse getAllLectures(LectureSearchParams params) {
+        int totalCount = lectureMapper.countAll(params);
+        return new PagedLecturesResponse(
+                totalCount / params.pageSize() + 1,
+                totalCount,
+                params.pageNumber(),
+                params.pageSize(),
+                lectureMapper.findAll(params)
+        );
     }
 
     @Transactional
