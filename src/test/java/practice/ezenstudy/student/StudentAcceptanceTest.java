@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
+import practice.ezenstudy.student.application.LoginRequest;
 import practice.ezenstudy.student.application.RegisterStudentRequest;
 
 @ActiveProfiles("test")
@@ -28,6 +29,29 @@ public class StudentAcceptanceTest {
                 .body(new RegisterStudentRequest("doraemon@gmail.com", "도라에몽", "dora123"))
                 .when()
                 .post("/students")
+                .then().log().all()
+                .statusCode(200);
+    }
+
+    @Test
+    void 로그인_성공() {
+        // given
+        String 이메일 = "doraemon@gmail.com";
+        String 비밀번호 = "dora123";
+        RestAssured.given().log().all()
+                .contentType(ContentType.JSON)
+                .body(new RegisterStudentRequest(이메일, "도라에몽", 비밀번호))
+                .when()
+                .post("/students")
+                .then().log().all()
+                .statusCode(200);
+
+        // when & then
+        RestAssured.given().log().all()
+                .contentType(ContentType.JSON)
+                .body(new LoginRequest(이메일, 비밀번호))
+                .when()
+                .post("/login")
                 .then().log().all()
                 .statusCode(200);
     }
