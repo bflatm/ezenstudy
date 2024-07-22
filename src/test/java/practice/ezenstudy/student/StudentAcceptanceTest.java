@@ -57,4 +57,37 @@ public class StudentAcceptanceTest {
                 .then().log().all()
                 .statusCode(200);
     }
+
+    @Test
+    void 프로필_조회_성공() {
+        // given
+        String 이메일 = "doraemon@gmail.com";
+        String 비밀번호 = "dora123";
+        RestAssured.given().log().all()
+                .contentType(ContentType.JSON)
+                .body(new RegisterStudentRequest(이메일, "도라에몽", 비밀번호))
+                .when()
+                .post("/students")
+                .then().log().all()
+                .statusCode(200);
+
+        String accessToken = RestAssured.given().log().all()
+                .contentType(ContentType.JSON)
+                .body(new LoginRequest(이메일, 비밀번호))
+                .when()
+                .post("/login")
+                .then().log().all()
+                .statusCode(200)
+                .extract()
+                .jsonPath()
+                .getString("accessToken");
+
+        // when & then
+        RestAssured.given().log().all()
+                .header("Authorization", "Bearer " + accessToken)
+                .when()
+                .get("/me")
+                .then().log().all()
+                .statusCode(200);
+    }
 }
