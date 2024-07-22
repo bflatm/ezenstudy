@@ -12,6 +12,7 @@ import practice.ezenstudy.student.domain.EnrollmentRepository;
 import practice.ezenstudy.student.domain.Student;
 import practice.ezenstudy.student.domain.StudentRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -71,6 +72,10 @@ public class StudentService {
         // 본인이 신청한 것이 맞는지 확인
         if (!enrollment.isEnrolledByStudent(student)) {
             throw new IllegalStateException("수강 신청 취소할 권한이 없는 학생입니다");
+        }
+
+        if (!enrollment.isWithinCancellationPeriod(LocalDateTime.now())) {
+            throw new IllegalStateException("수강 신청 취소 가능 기간이 지났습니다.");
         }
 
         // 데이터베이스에서 수강 신청 내역 삭제
