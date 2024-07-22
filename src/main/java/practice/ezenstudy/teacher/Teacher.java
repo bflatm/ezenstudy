@@ -18,6 +18,14 @@ public class Teacher {
 
     private LocalDate birthday;
 
+    protected Teacher() {
+    }
+
+    public Teacher(String name, LocalDate birthday) {
+        this.name = name;
+        this.birthday = birthday;
+    }
+
     public Long getId() {
         return id;
     }
