@@ -57,4 +57,9 @@ public class Teacher {
     public LocalDateTime getModifiedDateTime() {
         return modifiedDateTime;
     }
+
+    public void updateNameAndBirthday(String name, LocalDate birthday) {
+        this.name = name;
+        this.birthday = birthday;
+    }
 }
