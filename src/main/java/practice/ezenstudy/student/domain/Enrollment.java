@@ -1,21 +1,17 @@
 package practice.ezenstudy.student.domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import practice.ezenstudy.BaseEntity;
 import practice.ezenstudy.lecture.domain.Lecture;
 
 import java.time.LocalDateTime;
 
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Enrollment {
+public class Enrollment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +23,6 @@ public class Enrollment {
     @ManyToOne
     private Lecture lecture;
 
-    @CreatedDate
-    private LocalDateTime createdDateTime;
-
-    @LastModifiedDate
-    private LocalDateTime modifiedDateTime;
-
     public Enrollment() {
     }
 
@@ -42,9 +32,9 @@ public class Enrollment {
     }
 
     public Enrollment(Student student, Lecture lecture, LocalDateTime createdDateTime) {
+        super(createdDateTime);
         this.student = student;
         this.lecture = lecture;
-        this.createdDateTime = createdDateTime;
     }
 
     public Long getId() {
@@ -60,7 +50,7 @@ public class Enrollment {
     }
 
     public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
+        return super.getCreatedDateTime();
     }
 
     public boolean isEnrolledByStudent(Student student) {
@@ -69,7 +59,7 @@ public class Enrollment {
 
     public boolean isWithinCancellationPeriod(LocalDateTime now) {
         // 만으로 7일째 되는 날 자정 전까지 취소 신청을 받아주기로 했다고 가정
-        LocalDateTime cancelDeadline = createdDateTime.plusDays(7)
+        LocalDateTime cancelDeadline = super.getCreatedDateTime().plusDays(7)
                 .withHour(23)
                 .withMinute(59)
                 .withSecond(59)

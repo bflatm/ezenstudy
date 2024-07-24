@@ -18,6 +18,13 @@ public abstract class BaseEntity {
     @LastModifiedDate
     private LocalDateTime modifiedDateTime;
 
+    public BaseEntity() {
+    }
+
+    public BaseEntity(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
     }
