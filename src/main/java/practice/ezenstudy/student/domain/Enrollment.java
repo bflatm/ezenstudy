@@ -1,14 +1,19 @@
 package practice.ezenstudy.student.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import practice.ezenstudy.lecture.domain.Lecture;
 
 import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Enrollment {
 
@@ -22,7 +27,11 @@ public class Enrollment {
     @ManyToOne
     private Lecture lecture;
 
-    private LocalDateTime createdDateTime = LocalDateTime.now();
+    @CreatedDate
+    private LocalDateTime createdDateTime;
+
+    @LastModifiedDate
+    private LocalDateTime modifiedDateTime;
 
     public Enrollment() {
     }
