@@ -1,20 +1,16 @@
 package practice.ezenstudy.teacher;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import practice.ezenstudy.BaseEntity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Teacher {
+public class Teacher extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +19,6 @@ public class Teacher {
     private String name;
 
     private LocalDate birthday;
-
-    @CreatedDate
-    private LocalDateTime createdDateTime;
-
-    @LastModifiedDate
-    private LocalDateTime modifiedDateTime;
 
     protected Teacher() {
     }
@@ -51,11 +41,11 @@ public class Teacher {
     }
 
     public LocalDateTime getCreatedDateTime() {
-        return createdDateTime;
+        return super.getCreatedDateTime();
     }
 
     public LocalDateTime getModifiedDateTime() {
-        return modifiedDateTime;
+        return super.getModifiedDateTime();
     }
 
     public void updateNameAndBirthday(String name, LocalDate birthday) {
