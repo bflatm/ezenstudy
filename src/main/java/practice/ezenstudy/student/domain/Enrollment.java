@@ -13,10 +13,6 @@ import java.time.LocalDateTime;
 @Entity
 public class Enrollment extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @ManyToOne
     private Student student;
 
@@ -38,7 +34,7 @@ public class Enrollment extends BaseEntity {
     }
 
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     public Student getStudent() {

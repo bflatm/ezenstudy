@@ -12,10 +12,6 @@ import java.time.LocalDateTime;
 @Entity
 public class Teacher extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String name;
 
     private LocalDate birthday;
@@ -29,7 +25,7 @@ public class Teacher extends BaseEntity {
     }
 
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     public String getName() {

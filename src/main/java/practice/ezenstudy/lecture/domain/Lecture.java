@@ -21,10 +21,6 @@ import java.util.List;
 @Entity
 public class Lecture extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(unique = true) // 강의 제목 중복 불가
     private String title;
 
@@ -61,7 +57,7 @@ public class Lecture extends BaseEntity {
     }
 
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     public String getTitle() {

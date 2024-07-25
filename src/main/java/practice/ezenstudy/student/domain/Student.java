@@ -5,14 +5,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import practice.ezenstudy.BaseEntity;
 import practice.ezenstudy.SecurityUtils;
 
 @Entity
-public class Student {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Student extends BaseEntity {
 
     @Column(unique = true)
     private String email;
@@ -26,7 +23,7 @@ public class Student {
     }
 
     public Student(Long id, String email, String nickname, String password) {
-        this.id = id;
+        super(id);
         this.email = email;
         this.nickname = nickname;
         this.password = password;
@@ -39,7 +36,7 @@ public class Student {
     }
 
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     public String getEmail() {
