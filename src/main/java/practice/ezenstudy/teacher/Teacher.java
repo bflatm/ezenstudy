@@ -16,6 +16,8 @@ public class Teacher extends BaseEntity {
 
     private LocalDate birthday;
 
+//    abcde
+
     protected Teacher() {
     }
 
